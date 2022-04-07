@@ -98,7 +98,7 @@ public class Container implements Iterable<Auto> {
     }
 
 
-    public <Y extends Comparable<Y>, F extends Comparable<F>, P extends Comparable<P>> void sortByReleaseYear () {
+    public void sortByReleaseYear () {
 
         Object[] array = container.toArray();
         Object temp = null;
@@ -139,7 +139,7 @@ public class Container implements Iterable<Auto> {
 
         container.fromArray(array);
     }
-    public <Y extends Comparable<Y>, F extends Comparable<F>, P extends Comparable<P>> void sortByPrice () {
+    public void sortByPrice () {
 
         // P.S.
         // относительно этого метода сортировки не было точного понятия,

@@ -3,6 +3,7 @@ package ua.khpi.oop.alekseenko11;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.*;
+import java.lang.reflect.Field;
 import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -180,51 +181,59 @@ public class Container implements Iterable<Auto> {
         }
 
         for ( String line : result.split("\n") ) {
-            Auto ADDED_CAR = new Auto();
-            int i = 0;
-            String[] words = line.split(", ");
-
-            Pattern MODEL_NAME_PATTERN = Pattern.compile("[A-ZА-Я]+");
-            Matcher MODEL_NAME_MATCHER = MODEL_NAME_PATTERN.matcher(words[i]);
-
-            if ( MODEL_NAME_MATCHER.matches() ) {
-                ADDED_CAR.setModel( words[i++] );
-            } else return ERROR_MESS();
-
-            Pattern YEAR_PATTERN = Pattern.compile("\\d\\d\\d\\d");
-            Matcher YEAR_MATCHER = YEAR_PATTERN.matcher(words[i]);
-
-            if ( YEAR_MATCHER.find() ) {
-                ADDED_CAR.setReleaseYear( Integer.parseInt(words[i++]) );
-            } else return ERROR_MESS();
-
-            Pattern URBAN_PATTERN = Pattern.compile("\\d\\d\\d");
-            Matcher URBAN_MATCHER = URBAN_PATTERN.matcher(words[i]);
-
-            if ( URBAN_MATCHER.find() ) {
-                ADDED_CAR.setUrbanFuel( Integer.parseInt(words[i++]) );
-            } else return ERROR_MESS();
-
-            Pattern SUBURBAN_PATTERN = Pattern.compile("\\d\\d\\d");
-            Matcher SUBURBAN_MATCHER = SUBURBAN_PATTERN.matcher(words[i]);
-
-            if ( SUBURBAN_MATCHER.find() ) {
-                ADDED_CAR.setSubUrbanFuel( Integer.parseInt(words[i++]) );
-            } else return ERROR_MESS();
-
-            ADDED_CAR.setTechnicalCondition(Boolean.valueOf(words[i++]));
-
-            Pattern PRICE_PATTERN = Pattern.compile("\\d\\d\\d\\d\\d");
-            Matcher PRICE_MATCHER = PRICE_PATTERN.matcher(words[i]);
-
-            if ( PRICE_MATCHER.find() ) {
-                ADDED_CAR.setPrice( Integer.parseInt(words[i++]) );
-            } else return ERROR_MESS();
-
-            this.add(ADDED_CAR);
+            if ( !addingWithChecking(line.split(", ")) ) {
+                System.out.println("loadFromFile - FAILED");
+                return false;
+            }
         }
 
         System.out.println("loadFromFile - SUCCESS");
+        return true;
+    }
+
+    public boolean addingWithChecking( String[] fields ) {
+
+        Auto ADDED_CAR = new Auto();
+        int i = 0;
+
+        Pattern MODEL_NAME_PATTERN = Pattern.compile("[A-ZА-Я]+");
+        Matcher MODEL_NAME_MATCHER = MODEL_NAME_PATTERN.matcher(fields[i]);
+
+        if ( MODEL_NAME_MATCHER.matches() ) {
+            ADDED_CAR.setModel( fields[i++] );
+        } else return ERROR_MESS();
+
+        Pattern YEAR_PATTERN = Pattern.compile("\\d\\d\\d\\d");
+        Matcher YEAR_MATCHER = YEAR_PATTERN.matcher(fields[i]);
+
+        if ( YEAR_MATCHER.matches() ) {
+            ADDED_CAR.setReleaseYear( Integer.parseInt(fields[i++]) );
+        } else return ERROR_MESS();
+
+        Pattern URBAN_PATTERN = Pattern.compile("\\d\\d\\d");
+        Matcher URBAN_MATCHER = URBAN_PATTERN.matcher(fields[i]);
+
+        if ( URBAN_MATCHER.find() ) {
+            ADDED_CAR.setUrbanFuel( Integer.parseInt(fields[i++]) );
+        } else return ERROR_MESS();
+
+        Pattern SUBURBAN_PATTERN = Pattern.compile("\\d\\d\\d");
+        Matcher SUBURBAN_MATCHER = SUBURBAN_PATTERN.matcher(fields[i]);
+
+        if ( SUBURBAN_MATCHER.find() ) {
+            ADDED_CAR.setSubUrbanFuel( Integer.parseInt(fields[i++]) );
+        } else return ERROR_MESS();
+
+        ADDED_CAR.setTechnicalCondition(Boolean.valueOf(fields[i++]));
+
+        Pattern PRICE_PATTERN = Pattern.compile("\\d\\d\\d\\d\\d");
+        Matcher PRICE_MATCHER = PRICE_PATTERN.matcher(fields[i]);
+
+        if ( PRICE_MATCHER.find() ) {
+            ADDED_CAR.setPrice( Integer.parseInt(fields[i++]) );
+        } else return ERROR_MESS();
+
+        this.add(ADDED_CAR);
         return true;
     }
 

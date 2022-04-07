@@ -76,68 +76,38 @@ public class Menu {
     }
 
     private static boolean carAdding () {
-        Auto ADDED_CAR = new Auto();
+
+        int i = 0;
+        String[] result = new String[6];
 
         Scanner scan = new Scanner(System.in);
 
         System.out.println("Please type your car model:");
-        String model = scan.nextLine();
-
-        Pattern MODEL_NAME_PATTERN = Pattern.compile("[A-ZА-Я]+");
-        Matcher MODEL_NAME_MATCHER = MODEL_NAME_PATTERN.matcher(model);
-
-        if ( MODEL_NAME_MATCHER.find(1) ) {
-            ADDED_CAR.setModel( model );
-        } else return ERROR_MESS();
+        result[i++] = scan.nextLine();
 
         System.out.println("Please type your car release car:");
-        String year = scan.nextLine();
-
-        Pattern YEAR_PATTERN = Pattern.compile("\\d\\d\\d\\d");
-        Matcher YEAR_MATCHER = YEAR_PATTERN.matcher(year);
-
-        if ( YEAR_MATCHER.find() ) {
-            ADDED_CAR.setReleaseYear( Integer.parseInt(year) );
-        } else return ERROR_MESS();
+        result[i++] = scan.nextLine();
 
         System.out.println("Please type your car urban fuel:");
-        String urbanFuel = scan.nextLine();
-
-        Pattern URBAN_PATTERN = Pattern.compile("\\d\\d\\d");
-        Matcher URBAN_MATCHER = URBAN_PATTERN.matcher(urbanFuel);
-
-        if ( URBAN_MATCHER.find() ) {
-            ADDED_CAR.setUrbanFuel( Integer.parseInt(urbanFuel) );
-        } else return ERROR_MESS();
+        result[i++] = scan.nextLine();
 
         System.out.println("Please type your car suburban fuel:");
-        String suburbanFuel = scan.nextLine();
-
-        Pattern SUBURBAN_PATTERN = Pattern.compile("\\d\\d\\d");
-        Matcher SUBURBAN_MATCHER = SUBURBAN_PATTERN.matcher(suburbanFuel);
-
-        if ( SUBURBAN_MATCHER.find() ) {
-            ADDED_CAR.setSubUrbanFuel( Integer.parseInt(suburbanFuel) );
-        } else return ERROR_MESS();
+        result[i++] = scan.nextLine();
 
         System.out.println("Please choose your car state:");
         System.out.println("[1] Good");
         System.out.println("[2] Bad");
 
-        String technicalCondition = scan.nextLine();
-        ADDED_CAR.setTechnicalCondition(Integer.parseInt(technicalCondition) == 1);
+        result[i++] = scan.nextLine();
 
         System.out.println("Please type your car price:");
-        String price = scan.nextLine();
+        result[i++] = scan.nextLine();
 
-        Pattern PRICE_PATTERN = Pattern.compile("\\d\\d\\d\\d\\d");
-        Matcher PRICE_MATCHER = PRICE_PATTERN.matcher(price);
+        if ( !container.addingWithChecking(result) ) {
+            System.out.println("loadFromFile - FAILED\n");
+            return false;
+        }
 
-        if ( PRICE_MATCHER.find() ) {
-            ADDED_CAR.setPrice( Integer.parseInt(price) );
-        } else return ERROR_MESS();
-
-        container.add(ADDED_CAR);
         return true;
     }
 
