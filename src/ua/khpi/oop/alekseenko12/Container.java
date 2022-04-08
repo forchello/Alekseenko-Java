@@ -1,9 +1,11 @@
-package ua.khpi.oop.alekseenko11;
+package ua.khpi.oop.alekseenko12;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.*;
 import java.lang.reflect.Field;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -210,14 +212,14 @@ public class Container implements Iterable<Auto> {
             ADDED_CAR.setReleaseYear( Integer.parseInt(fields[i++]) );
         } else return ERROR_MESS();
 
-        Pattern URBAN_PATTERN = Pattern.compile("\\d\\d\\d");
+        Pattern URBAN_PATTERN = Pattern.compile("\\d+");
         Matcher URBAN_MATCHER = URBAN_PATTERN.matcher(fields[i]);
 
         if ( URBAN_MATCHER.find() ) {
             ADDED_CAR.setUrbanFuel( Integer.parseInt(fields[i++]) );
         } else return ERROR_MESS();
 
-        Pattern SUBURBAN_PATTERN = Pattern.compile("\\d\\d\\d");
+        Pattern SUBURBAN_PATTERN = Pattern.compile("\\d+");
         Matcher SUBURBAN_MATCHER = SUBURBAN_PATTERN.matcher(fields[i]);
 
         if ( SUBURBAN_MATCHER.find() ) {
@@ -240,6 +242,28 @@ public class Container implements Iterable<Auto> {
     private static boolean ERROR_MESS () {
         System.err.println("Error. Incorrect input.");
         return false;
+    }
+
+    public void findCar() {
+        Object[] car_array = container.toArray();
+
+        for ( Object car : car_array ) {
+
+            final int fuel = (Integer) ((Auto) car ).getUrbanFuel() + (Integer) ((Auto) car ).getSubUrbanFuel();
+            // если топливо не тратиться - значит машина єто електрокар
+
+            if ( fuel == 0 ) {
+
+                Pattern YEAR_PATTERN = Pattern.compile("2021");
+                Matcher YEAR_MATCHER = YEAR_PATTERN.matcher(((Auto) car ).getReleaseYear().toString());
+
+                if ( YEAR_MATCHER.find() ) {
+                    System.out.println(car.toString());
+                }
+            }
+        }
+
+        System.out.println();
     }
 
     public Iterator<Auto> iterator() {
