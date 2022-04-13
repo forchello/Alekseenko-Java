@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.2" class="java.beans.XMLDecoder">
+ <array class="java.lang.Object" length="20">
+  <void index="0">
+   <object class="ua.khpi.oop.alekseenko13.Auto">
+    <void property="model">
+     <string>BMW M1</string>
+    </void>
+    <void property="price">
+     <int>70000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2020</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>100</int>
+    </void>
+    <void property="urbanFuel">
+     <int>500</int>
+    </void>
+   </object>
+  </void>
+  <void index="1">
+   <object class="ua.khpi.oop.alekseenko13.Auto">
+    <void property="model">
+     <string>BMW E30</string>
+    </void>
+    <void property="price">
+     <int>50000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2015</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>100</int>
+    </void>
+    <void property="urbanFuel">
+     <int>500</int>
+    </void>
+   </object>
+  </void>
+  <void index="2">
+   <object class="ua.khpi.oop.alekseenko13.Auto">
+    <void property="model">
+     <string>BMW M5 E39</string>
+    </void>
+    <void property="price">
+     <int>60000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2018</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>100</int>
+    </void>
+    <void property="urbanFuel">
+     <int>500</int>
+    </void>
+   </object>
+  </void>
+  <void index="3">
+   <object class="ua.khpi.oop.alekseenko13.Auto">
+    <void property="model">
+     <string>BMW M5 E28</string>
+    </void>
+    <void property="price">
+     <int>80000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2020</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>100</int>
+    </void>
+    <void property="urbanFuel">
+     <int>500</int>
+    </void>
+   </object>
+  </void>
+  <void index="4">
+   <object class="ua.khpi.oop.alekseenko13.Auto">
+    <void property="model">
+     <string>BMW M5 E46</string>
+    </void>
+    <void property="price">
+     <int>89000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2022</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>100</int>
+    </void>
+    <void property="urbanFuel">
+     <int>500</int>
+    </void>
+   </object>
+  </void>
+  <void index="5">
+   <object class="ua.khpi.oop.alekseenko13.Auto">
+    <void property="model">
+     <string>TESLA MODEL 3 LONG RANGE</string>
+    </void>
+    <void property="price">
+     <int>40000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2020</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>0</int>
+    </void>
+    <void property="urbanFuel">
+     <int>0</int>
+    </void>
+   </object>
+  </void>
+  <void index="6">
+   <object class="ua.khpi.oop.alekseenko13.Auto">
+    <void property="model">
+     <string>TESLA MODEL X LONG RANGE</string>
+    </void>
+    <void property="price">
+     <int>99999</int>
+    </void>
+    <void property="releaseYear">
+     <int>2021</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>0</int>
+    </void>
+    <void property="urbanFuel">
+     <int>0</int>
+    </void>
+   </object>
+  </void>
+  <void index="7">
+   <object class="ua.khpi.oop.alekseenko13.Auto">
+    <void property="model">
+     <string>TESLA MODEL S PERFORMANCE</string>
+    </void>
+    <void property="price">
+     <int>82000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2018</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>0</int>
+    </void>
+    <void property="urbanFuel">
+     <int>0</int>
+    </void>
+   </object>
+  </void>
+  <void index="8">
+   <object class="ua.khpi.oop.alekseenko13.Auto">
+    <void property="model">
+     <string>TESLA MODEL 3 PERFORMANCE</string>
+    </void>
+    <void property="price">
+     <int>75000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2017</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>0</int>
+    </void>
+    <void property="urbanFuel">
+     <int>0</int>
+    </void>
+   </object>
+  </void>
+  <void index="9">
+   <object class="ua.khpi.oop.alekseenko13.Auto">
+    <void property="model">
+     <string>TESLA MODEL S LONG RANGE</string>
+    </void>
+    <void property="price">
+     <int>90000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2021</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>0</int>
+    </void>
+    <void property="urbanFuel">
+     <int>0</int>
+    </void>
+   </object>
+  </void>
+  <void index="10">
+   <object class="ua.khpi.oop.alekseenko13.Auto">
+    <void property="model">
+     <string>MERCEDES-AMG GT 63 S</string>
+    </void>
+    <void property="price">
+     <int>88000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2017</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>600</int>
+    </void>
+    <void property="urbanFuel">
+     <int>500</int>
+    </void>
+   </object>
+  </void>
+  <void index="11">
+   <object class="ua.khpi.oop.alekseenko13.Auto">
+    <void property="model">
+     <string>MERCEDES-BENZ A-CLASS SEDAN</string>
+    </void>
+    <void property="price">
+     <int>70000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2017</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>600</int>
+    </void>
+    <void property="urbanFuel">
+     <int>500</int>
+    </void>
+   </object>
+  </void>
+  <void index="12">
+   <object class="ua.khpi.oop.alekseenko13.Auto">
+    <void property="model">
+     <string>MERCEDES-AMG C 63 S</string>
+    </void>
+    <void property="price">
+     <int>82000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2017</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>600</int>
+    </void>
+    <void property="urbanFuel">
+     <int>500</int>
+    </void>
+   </object>
+  </void>
+  <void index="13">
+   <object class="ua.khpi.oop.alekseenko13.Auto">
+    <void property="model">
+     <string>MERCEDES-BENZ SL-CLASS</string>
+    </void>
+    <void property="price">
+     <int>70000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2017</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>600</int>
+    </void>
+    <void property="urbanFuel">
+     <int>500</int>
+    </void>
+   </object>
+  </void>
+  <void index="14">
+   <object class="ua.khpi.oop.alekseenko13.Auto">
+    <void property="model">
+     <string>MERCEDES-BENZ EQC</string>
+    </void>
+    <void property="price">
+     <int>60000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2017</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>600</int>
+    </void>
+    <void property="urbanFuel">
+     <int>500</int>
+    </void>
+   </object>
+  </void>
+  <void index="15">
+   <object class="ua.khpi.oop.alekseenko13.Auto">
+    <void property="model">
+     <string>FORD MUSTANG</string>
+    </void>
+    <void property="price">
+     <int>50000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2002</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>500</int>
+    </void>
+    <void property="urbanFuel">
+     <int>300</int>
+    </void>
+   </object>
+  </void>
+  <void index="16">
+   <object class="ua.khpi.oop.alekseenko13.Auto">
+    <void property="model">
+     <string>FORD ECOSPORT</string>
+    </void>
+    <void property="price">
+     <int>35000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2002</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>500</int>
+    </void>
+    <void property="urbanFuel">
+     <int>300</int>
+    </void>
+   </object>
+  </void>
+  <void index="17">
+   <object class="ua.khpi.oop.alekseenko13.Auto">
+    <void property="model">
+     <string>FORD RANGE</string>
+    </void>
+    <void property="price">
+     <int>45000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2002</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>500</int>
+    </void>
+    <void property="urbanFuel">
+     <int>300</int>
+    </void>
+   </object>
+  </void>
+  <void index="18">
+   <object class="ua.khpi.oop.alekseenko13.Auto">
+    <void property="model">
+     <string>FORD F-150</string>
+    </void>
+    <void property="price">
+     <int>14000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2002</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>500</int>
+    </void>
+    <void property="urbanFuel">
+     <int>300</int>
+    </void>
+   </object>
+  </void>
+  <void index="19">
+   <object class="ua.khpi.oop.alekseenko13.Auto">
+    <void property="model">
+     <string>FORD EXPLORER</string>
+    </void>
+    <void property="price">
+     <int>80000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2002</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>500</int>
+    </void>
+    <void property="urbanFuel">
+     <int>300</int>
+    </void>
+   </object>
+  </void>
+ </array>
+</java>

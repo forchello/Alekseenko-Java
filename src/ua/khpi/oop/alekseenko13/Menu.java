@@ -13,6 +13,7 @@ public class Menu {
     private static final String ANSI_YELLOW = "\u001B[33m";
     private static final String ANSI_GREEN = "\u001B[32m";
     private static final String ANSI_BLUE = "\u001B[34m";
+    private static final String ANSI_RED = "\u001b[31m";
 
     private static volatile Container container = new Container();
 
@@ -62,7 +63,7 @@ public class Menu {
                     container.carList();
                     break;
                 }
-                case 4: container.findCar(); break;
+                case 4: container.findCar(100); break;
                 case 5: SAVING( true ); break;
                 case 6: LOADING( true ); break;
                 case 7: SAVING( false ); break;
@@ -259,19 +260,21 @@ public class Menu {
 
         System.out.println("Input max thread`s working time:");
         Scanner scanner1 = new Scanner(System.in);
-        int time = scanner1.nextInt();
+        long time = scanner1.nextLong();
 
-        System.out.println("MAIN thread -> " + Thread.currentThread().getName() + " / " + Thread.currentThread().getId());
+        //System.out.println(ANSI_BLUE + "MAIN thread -> " + Thread.currentThread().getName() + " / " + Thread.currentThread().getId() +
+        //            ANSI_RESET);
 
-        Thread thread1 = new Thread(new Runner("sort", time));
+        Thread thread0 = new Thread(new Runner("save_to_xml", 100));
+        thread0.start();
+
+        Thread thread1 = new Thread(new Runner("save_to_txt", 100));
         thread1.start();
 
         Thread thread2 = new Thread(new Runner("find", time));
         thread2.start();
 
-        Thread thread3 = new Thread(new Runner("print", time));
-        thread3.start();
-
+        System.out.println(ANSI_BLUE + "Thread '" + Thread.currentThread().getName() + "' is completed successfully!" + ANSI_RESET);
         Scanner scanner2 = new Scanner(System.in);
         scanner2.nextLine();
 
@@ -281,38 +284,45 @@ public class Menu {
     private static class Runner implements Runnable {
 
         private String method = "";
-        private int time = 0;
+        private long time_in_ms = 0;
 
-        Runner ( String method, int time ) {
+        Runner ( String method, long time ) {
             this.method = method;
-            this.time = time;
+            this.time_in_ms = time;
         }
 
         @Override
         public void run() {
+            long started = System.nanoTime();
             switch (method) {
-                case "sort" -> {
-                    System.out.println("sort thread -> " + Thread.currentThread().getName() + " / "
-                                                         + Thread.currentThread().getId() );
-                    container.sortByPrice();
+                case "save_to_xml" -> {
+                    //System.out.println(ANSI_YELLOW + "thread to xml -> " + Thread.currentThread().getName() + " / "
+                    //                                     + Thread.currentThread().getId() + ANSI_RESET);
+                    container.xml_save("ThreadSaving.xml");
+                }
+                case "save_to_txt" -> {
+                    //System.out.println(ANSI_YELLOW + "thread to txt -> " + Thread.currentThread().getName() + " / "
+                    //        + Thread.currentThread().getId() + ANSI_RESET);
+                    container.standard_save("ThreadSaving.txt");
                 }
                 case "find" -> {
-                    System.out.println("find thread -> " + Thread.currentThread().getName() + " / "
-                                                         + Thread.currentThread().getId());
-                    container.findCar();
-                }
-                case "print" -> {
-                    System.out.println("print thread -> " + Thread.currentThread().getName() + " / "
-                                                          + Thread.currentThread().getId());
-                    container.carList();
+                    //System.out.println(ANSI_YELLOW + "find thread -> " + Thread.currentThread().getName() + " / "
+                    //                                     + Thread.currentThread().getId() + ANSI_RESET);
+                    if ( !container.findCar(time_in_ms) ) {
+                        System.out.println(ANSI_RED + "ERROR" + ANSI_RESET);
+                        System.exit(-1);
+                    }
                 }
             }
 
-            try {
-                Thread.sleep(time);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            System.out.println(ANSI_YELLOW + Thread.currentThread().getName() + ANSI_RESET + " --> " + (System.nanoTime() - started));
+            System.out.println(ANSI_BLUE + "Thread '" + Thread.currentThread().getName() + "' is completed successfully!" + ANSI_RESET);
+
+//            try {
+//                Thread.sleep(2000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
         }
     }
 }

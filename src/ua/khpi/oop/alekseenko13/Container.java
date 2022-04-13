@@ -9,6 +9,14 @@ import java.util.regex.Pattern;
 
 
 public class Container implements Iterable<Auto>  {
+
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_YELLOW = "\u001B[33m";
+    private static final String ANSI_GREEN = "\u001B[32m";
+    private static final String ANSI_BLUE = "\u001B[34m";
+
+    private static final long DIVIDER = 1_000_000;
+
     private LinkedList<Auto> container = new LinkedList();
 //    private Iterator<Auto> iterator = container.iterator();
 
@@ -54,14 +62,14 @@ public class Container implements Iterable<Auto>  {
     }
 
     public void xml_save ( String path ) {
-        System.out.println("SAVING...");
+        System.out.println(ANSI_GREEN + "XML SAVING...\n" + ANSI_RESET);
         try (XMLEncoder xmlEncoder = new XMLEncoder(new FileOutputStream(path))) {
             xmlEncoder.writeObject( container.toArray() );
             xmlEncoder.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("SAVING SUCCESSFULLY ENDED\n");
+        System.out.println(ANSI_GREEN + "XML SAVING SUCCESSFULLY ENDED\n" + ANSI_RESET);
     }
 
     public void xml_load ( String path ) {
@@ -75,7 +83,7 @@ public class Container implements Iterable<Auto>  {
     }
 
     public void standard_save(String path ) {
-        System.out.println("SAVING...");
+        System.out.println(ANSI_GREEN + "TXT SAVING...\n" + ANSI_RESET);
         try {
             FileOutputStream fileOutputStream = new FileOutputStream( path );
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -84,7 +92,7 @@ public class Container implements Iterable<Auto>  {
         } catch (Exception e) {
             System.err.println(e);
         }
-        System.out.println("SAVING SUCCESSFULLY ENDED\n");
+        System.out.println(ANSI_GREEN + "TXT SAVING SUCCESSFULLY ENDED\n" + ANSI_RESET);
     }
 
     public void standard_load ( String path ) {
@@ -98,7 +106,6 @@ public class Container implements Iterable<Auto>  {
         }
         System.out.println("LOADING SUCCESSFULLY ENDED\n");
     }
-
 
     public void sortByReleaseYear () {
 
@@ -241,26 +248,41 @@ public class Container implements Iterable<Auto>  {
         return false;
     }
 
-    public void findCar() {
+    private static boolean TimeIsOver (long start_time_ms, long max_time_ms) {
+        long time_spent = System.nanoTime() / DIVIDER - start_time_ms;
+        System.out.println(ANSI_GREEN + "Time Spent From Start --> "+ ANSI_YELLOW + time_spent + " ms");
+
+        return max_time_ms > time_spent;
+    }
+
+    public boolean findCar(long max_time_ms) {
+
+        long start_time_ms = System.nanoTime() / DIVIDER;
+
+        System.out.println(ANSI_GREEN + "Time Max --> " + ANSI_BLUE + max_time_ms + " ms");
+
         Object[] car_array = container.toArray();
 
         for ( Object car : car_array ) {
 
-            final int fuel = (Integer) ((Auto) car ).getUrbanFuel() + (Integer) ((Auto) car ).getSubUrbanFuel();
-            // если топливо не тратиться - значит машина єто електрокар
+            if( TimeIsOver( start_time_ms, max_time_ms ) ) {
+                final int fuel = (Integer) ((Auto) car).getUrbanFuel() + (Integer) ((Auto) car).getSubUrbanFuel();
+                // если топливо не тратиться - значит машина єто електрокар
 
-            if ( fuel == 0 ) {
+                if (fuel == 0) {
 
-                Pattern YEAR_PATTERN = Pattern.compile("2021");
-                Matcher YEAR_MATCHER = YEAR_PATTERN.matcher(((Auto) car ).getReleaseYear().toString());
+                    Pattern YEAR_PATTERN = Pattern.compile("2021");
+                    Matcher YEAR_MATCHER = YEAR_PATTERN.matcher(((Auto) car).getReleaseYear().toString());
 
-                if ( YEAR_MATCHER.find() ) {
-                    System.out.println(car.toString());
+                    if (YEAR_MATCHER.find()) {
+                        System.out.println("\n" + ANSI_YELLOW + car.toString() + ANSI_RESET + "\n");
+                    }
                 }
-            }
+            } else return false;
         }
 
         System.out.println();
+        return true;
     }
 
     public Iterator<Auto> iterator() {
