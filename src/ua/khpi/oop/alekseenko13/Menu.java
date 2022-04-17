@@ -17,7 +17,7 @@ public class Menu {
 
     private static volatile Container container = new Container();
 
-    public static void create (String[] args) throws IOException {
+    public static void create (String[] args) throws IOException, InterruptedException {
 
         String ConsArg = args.length==0 ? "" : args[0];
 
@@ -275,8 +275,21 @@ public class Menu {
         thread2.start();
 
         System.out.println(ANSI_BLUE + "Thread '" + Thread.currentThread().getName() + "' is completed successfully!" + ANSI_RESET);
-        Scanner scanner2 = new Scanner(System.in);
-        scanner2.nextLine();
+
+//        if ( thread0.isAlive() ) {
+//            thread0.interrupt();
+//        }
+//
+//        if ( thread1.isAlive() ) {
+//            thread1.interrupt();
+//        }
+//
+//        if ( thread2.isAlive() ) {
+//            thread2.interrupt();
+//        }
+
+        //Scanner scanner2 = new Scanner(System.in);
+        //scanner2.nextLine();
 
         System.exit(0);
     }
@@ -308,21 +321,20 @@ public class Menu {
                 case "find" -> {
                     //System.out.println(ANSI_YELLOW + "find thread -> " + Thread.currentThread().getName() + " / "
                     //                                     + Thread.currentThread().getId() + ANSI_RESET);
-                    if ( !container.findCar(time_in_ms) ) {
-                        System.out.println(ANSI_RED + "ERROR" + ANSI_RESET);
-                        System.exit(-1);
+                    try {
+                        System.out.println("HELLLOOO");
+                        if ( !container.findCar(time_in_ms) ) {
+                            System.out.println(ANSI_RED + "ERROR" + ANSI_RESET);
+                            System.exit(-1);
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
             }
 
             System.out.println(ANSI_YELLOW + Thread.currentThread().getName() + ANSI_RESET + " --> " + (System.nanoTime() - started));
             System.out.println(ANSI_BLUE + "Thread '" + Thread.currentThread().getName() + "' is completed successfully!" + ANSI_RESET);
-
-//            try {
-//                Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
         }
     }
 }

@@ -255,7 +255,7 @@ public class Container implements Iterable<Auto>  {
         return max_time_ms > time_spent;
     }
 
-    public boolean findCar(long max_time_ms) {
+    public boolean findCar(long max_time_ms) throws InterruptedException {
 
         long start_time_ms = System.nanoTime() / DIVIDER;
 
@@ -264,7 +264,6 @@ public class Container implements Iterable<Auto>  {
         Object[] car_array = container.toArray();
 
         for ( Object car : car_array ) {
-
             if( TimeIsOver( start_time_ms, max_time_ms ) ) {
                 final int fuel = (Integer) ((Auto) car).getUrbanFuel() + (Integer) ((Auto) car).getSubUrbanFuel();
                 // если топливо не тратиться - значит машина єто електрокар
