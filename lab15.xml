@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.2" class="java.beans.XMLDecoder">
+ <array class="java.lang.Object" length="3">
+  <void index="0">
+   <object class="ua.khpi.oop.alekseenko15.Auto">
+    <void property="model">
+     <string>TESLA</string>
+    </void>
+    <void property="price">
+     <int>50000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2021</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>0</int>
+    </void>
+    <void property="urbanFuel">
+     <int>0</int>
+    </void>
+   </object>
+  </void>
+  <void index="1">
+   <object class="ua.khpi.oop.alekseenko15.Auto">
+    <void property="model">
+     <string>MERCEDES</string>
+    </void>
+    <void property="price">
+     <int>30000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2016</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>130</int>
+    </void>
+    <void property="urbanFuel">
+     <int>100</int>
+    </void>
+   </object>
+  </void>
+  <void index="2">
+   <object class="ua.khpi.oop.alekseenko15.Auto">
+    <void property="model">
+     <string>BMW</string>
+    </void>
+    <void property="price">
+     <int>10000</int>
+    </void>
+    <void property="releaseYear">
+     <int>2002</int>
+    </void>
+    <void property="subUrbanFuel">
+     <int>200</int>
+    </void>
+    <void property="urbanFuel">
+     <int>100</int>
+    </void>
+   </object>
+  </void>
+ </array>
+</java>
