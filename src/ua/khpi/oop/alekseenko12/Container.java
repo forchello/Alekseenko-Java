@@ -244,8 +244,9 @@ public class Container implements Iterable<Auto> {
         return false;
     }
 
-    public void findCar() {
+    public boolean findCar() {
         Object[] car_array = container.toArray();
+        int count = 0;
 
         for ( Object car : car_array ) {
 
@@ -258,12 +259,14 @@ public class Container implements Iterable<Auto> {
                 Matcher YEAR_MATCHER = YEAR_PATTERN.matcher(((Auto) car ).getReleaseYear().toString());
 
                 if ( YEAR_MATCHER.find() ) {
+                    count++;
                     System.out.println(car.toString());
                 }
             }
         }
 
         System.out.println();
+        return count != 0;
     }
 
     public Iterator<Auto> iterator() {

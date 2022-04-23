@@ -40,7 +40,7 @@ public class Container implements Iterable<Auto> {
     }
 
     // проверка на наличие объекта в списке
-    public boolean Contains( Auto i ) {
+    public boolean contains( Auto i ) {
         return container.contains(i);
     }
 
@@ -94,13 +94,13 @@ public class Container implements Iterable<Auto> {
         System.out.println("LOADING SUCCESSFULLY ENDED\n");
     }
 
-    public Iterator<Auto> iterator() {
-        return new ListIterator();
+    public ListIterator<Auto> iterator() {
+        return new ListIterator<>();
     };
 
-    public class ListIterator implements Iterator<Auto> {
+    public class ListIterator<Auto> implements Iterator<Auto> {
         private int index;
-        private Object[] object = container.toArray();
+        private final Object[] object = container.toArray();
 
         @Override
         public boolean hasNext() {
@@ -117,9 +117,5 @@ public class Container implements Iterable<Auto> {
         public void remove() {
             removeByPos(index);
         }
-
-//        public void reset() {
-//            index = 0;
-//        }
     }
 }

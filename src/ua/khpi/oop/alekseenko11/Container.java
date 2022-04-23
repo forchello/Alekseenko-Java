@@ -210,14 +210,14 @@ public class Container implements Iterable<Auto> {
             ADDED_CAR.setReleaseYear( Integer.parseInt(fields[i++]) );
         } else return ERROR_MESS();
 
-        Pattern URBAN_PATTERN = Pattern.compile("\\d\\d\\d");
+        Pattern URBAN_PATTERN = Pattern.compile("\\d+");
         Matcher URBAN_MATCHER = URBAN_PATTERN.matcher(fields[i]);
 
         if ( URBAN_MATCHER.find() ) {
             ADDED_CAR.setUrbanFuel( Integer.parseInt(fields[i++]) );
         } else return ERROR_MESS();
 
-        Pattern SUBURBAN_PATTERN = Pattern.compile("\\d\\d\\d");
+        Pattern SUBURBAN_PATTERN = Pattern.compile("\\d+");
         Matcher SUBURBAN_MATCHER = SUBURBAN_PATTERN.matcher(fields[i]);
 
         if ( SUBURBAN_MATCHER.find() ) {

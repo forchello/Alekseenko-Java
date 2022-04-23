@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.2" class="java.beans.XMLDecoder">
+ <array class="java.lang.Object" length="5">
+  <void index="0">
+   <object class="ua.khpi.oop.alekseenko09.Auto">
+    <void property="model">
+     <string>a1</string>
+    </void>
+   </object>
+  </void>
+  <void index="1">
+   <object class="ua.khpi.oop.alekseenko09.Auto">
+    <void property="model">
+     <string>b2</string>
+    </void>
+   </object>
+  </void>
+  <void index="2">
+   <object class="ua.khpi.oop.alekseenko09.Auto">
+    <void property="model">
+     <string>c3</string>
+    </void>
+   </object>
+  </void>
+  <void index="3">
+   <object class="ua.khpi.oop.alekseenko09.Auto">
+    <void property="model">
+     <string>d4</string>
+    </void>
+   </object>
+  </void>
+  <void index="4">
+   <object class="ua.khpi.oop.alekseenko09.Auto">
+    <void property="model">
+     <string>g5</string>
+    </void>
+   </object>
+  </void>
+ </array>
+</java>

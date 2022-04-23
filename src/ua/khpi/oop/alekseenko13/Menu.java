@@ -3,7 +3,10 @@ package ua.khpi.oop.alekseenko13;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,12 +20,12 @@ public class Menu {
 
     private static volatile Container container = new Container();
 
-    public static void create (String[] args) throws IOException, InterruptedException {
+    public static void create(String[] args) throws IOException, InterruptedException {
 
-        String ConsArg = args.length==0 ? "" : args[0];
+        String ConsArg = args.length == 0 ? "" : args[0];
 
         switch (ConsArg) {
-            case "-auto" -> CarContainerInit();
+            case "-auto" -> CarContainerInit(1);
             case "" -> {
                 System.out.println("\n" + ANSI_YELLOW + "WARNING:" + ANSI_RESET);
                 System.out.println("The program was launched without flags.\n");
@@ -53,21 +56,33 @@ public class Menu {
             switch (chooseNumber) {
                 case 1:
                     if (carAdding()) {
-                        System.out.println(ANSI_GREEN + "ADDED!\n" + ANSI_RESET );
+                        System.out.println(ANSI_GREEN + "ADDED!\n" + ANSI_RESET);
                     } else {
                         System.err.println("Please try add correctly");
                     }
                     break;
-                case 2: container.removeByPos( inputCarNumber() ); break;
+                case 2:
+                    container.removeByPos(inputCarNumber());
+                    break;
                 case 3: {
                     container.carList();
                     break;
                 }
-                case 4: container.findCar(100); break;
-                case 5: SAVING( true ); break;
-                case 6: LOADING( true ); break;
-                case 7: SAVING( false ); break;
-                case 8: LOADING( false ); break;
+                case 4:
+                    container.findCar(100);
+                    break;
+                case 5:
+                    SAVING(true);
+                    break;
+                case 6:
+                    LOADING(true);
+                    break;
+                case 7:
+                    SAVING(false);
+                    break;
+                case 8:
+                    LOADING(false);
+                    break;
                 case 9:
                     return;
                 default: {
@@ -78,7 +93,7 @@ public class Menu {
         }
     }
 
-    private static boolean carAdding () {
+    private static boolean carAdding() {
 
         int i = 0;
         String[] result = new String[6];
@@ -106,7 +121,7 @@ public class Menu {
         System.out.println("Please type your car price:");
         result[i++] = scan.nextLine();
 
-        if ( !container.addingWithChecking(result) ) {
+        if (!container.addingWithChecking(result)) {
             System.out.println("loadFromFile - FAILED\n");
             return false;
         }
@@ -114,16 +129,16 @@ public class Menu {
         return true;
     }
 
-    private static int inputCarNumber () {
+    private static int inputCarNumber() {
         Scanner scan = new Scanner(System.in);
         String number = scan.nextLine();
 
-        if ( number.equals("") ) {
+        if (number.equals("")) {
             return 0;
         } else return Integer.parseInt(number);
     }
 
-    private static void SAVING( boolean standard ) {
+    private static void SAVING(boolean standard) {
         System.out.println("Enter the path to your file:");
         String PATH = "C:/Users/FORCH/Desktop";
 
@@ -132,7 +147,7 @@ public class Menu {
             Scanner scan = new Scanner(System.in);
             String command = scan.nextLine();
 
-            if ( command.equals("exit") ) {
+            if (command.equals("exit")) {
                 System.out.println("");
                 return;
             }
@@ -146,22 +161,21 @@ public class Menu {
             Matcher TOUCH_MATCHER = TOUCH_PATTERN.matcher(command);
 
             // -----------------------------------------
-            if ( command.equals("ls") ) {
+            if (command.equals("ls")) {
                 File dir = new File(PATH);
-                for(File item : dir.listFiles()){
-                    if(item.isDirectory()){
-                        System.out.println( ANSI_GREEN + "- " + item.getName() + ANSI_RESET);
+                for (File item : dir.listFiles()) {
+                    if (item.isDirectory()) {
+                        System.out.println(ANSI_GREEN + "- " + item.getName() + ANSI_RESET);
                     } else {
                         Pattern LS_XML_PATTERN = Pattern.compile(".+\\.xml");
                         Matcher LS_XML_MATCHER = LS_XML_PATTERN.matcher(item.getName());
 
-                        if ( LS_XML_MATCHER.find() ) {
+                        if (LS_XML_MATCHER.find()) {
                             System.out.println(ANSI_BLUE + "- " + item.getName() + ANSI_RESET);
                         } else System.out.println(ANSI_YELLOW + "- " + item.getName() + ANSI_RESET);
                     }
                 }
-            }
-            else if (CD_MATCHER.find()) {
+            } else if (CD_MATCHER.find()) {
                 String cd_string = command.substring(CD_MATCHER.start() + 3, CD_MATCHER.end());
                 PATH = PATH + "/" + cd_string;
             } else if (TOUCH_MATCHER.find()) {
@@ -169,7 +183,7 @@ public class Menu {
 
                 File file_path = new File(PATH + "/" + file_name);
 
-                if ( file_path.exists() ) {
+                if (file_path.exists()) {
                     System.out.println(ANSI_YELLOW + "WARNING" + ANSI_RESET);
                     System.out.println("The file already exists at the given path. Recreate?");
                     System.out.println("[1] - yes");
@@ -178,15 +192,15 @@ public class Menu {
                     Scanner recreate = new Scanner(System.in);
                     int returned = recreate.nextInt();
 
-                    if ( returned == 1 ) {
-                        if ( standard ) {
+                    if (returned == 1) {
+                        if (standard) {
                             container.standard_save(PATH + "/" + file_name);
                         } else {
                             container.xml_save(PATH + "/" + file_name);
                         }
                     }
                 } else {
-                    if ( standard ) {
+                    if (standard) {
                         container.standard_save(PATH + "/" + file_name);
                     } else {
                         container.xml_save(PATH + "/" + file_name);
@@ -199,7 +213,7 @@ public class Menu {
         }
     }
 
-    private static void LOADING( boolean standard ) {
+    private static void LOADING(boolean standard) {
         System.out.println("Enter the path to your file:");
         String PATH = "C:/Users/FORCH/Desktop";
 
@@ -208,7 +222,7 @@ public class Menu {
             Scanner scan = new Scanner(System.in);
             String command = scan.nextLine();
 
-            if ( command.equals("exit") ) {
+            if (command.equals("exit")) {
                 System.out.println("");
                 return;
             }
@@ -222,28 +236,27 @@ public class Menu {
             Matcher CAT_MATCHER = CAT_PATTERN.matcher(command);
 
             // -----------------------------------------
-            if ( command.equals("ls") ) {
+            if (command.equals("ls")) {
                 File dir = new File(PATH);
-                for(File item : dir.listFiles()){
-                    if(item.isDirectory()){
-                        System.out.println( ANSI_GREEN + "- " + item.getName() + ANSI_RESET);
+                for (File item : dir.listFiles()) {
+                    if (item.isDirectory()) {
+                        System.out.println(ANSI_GREEN + "- " + item.getName() + ANSI_RESET);
                     } else {
                         Pattern LS_XML_PATTERN = Pattern.compile(".+\\.xml");
                         Matcher LS_XML_MATCHER = LS_XML_PATTERN.matcher(item.getName());
 
-                        if ( LS_XML_MATCHER.find() ) {
+                        if (LS_XML_MATCHER.find()) {
                             System.out.println(ANSI_BLUE + "- " + item.getName() + ANSI_RESET);
                         } else System.out.println(ANSI_YELLOW + "- " + item.getName() + ANSI_RESET);
                     }
                 }
-            }
-            else if (CD_MATCHER.find()) {
+            } else if (CD_MATCHER.find()) {
                 String cd_string = command.substring(CD_MATCHER.start() + 3, CD_MATCHER.end());
                 PATH = PATH + "/" + cd_string;
             } else if (CAT_MATCHER.find()) {
                 String file_name = command.substring(CAT_MATCHER.start() + 4, CAT_MATCHER.end());
 
-                if ( standard ) {
+                if (standard) {
                     container.standard_load(PATH + "/" + file_name);
                 } else {
                     container.xml_load(PATH + "/" + file_name);
@@ -254,44 +267,35 @@ public class Menu {
         }
     }
 
-    private static void CarContainerInit() throws IOException {
+    public static List<Long> CarContainerInit(int mode) throws IOException {
 
         container.loadFromFile("save_lab_13.txt");
+        List<Long> threads = new ArrayList<>();
+        long time = 1000;
 
-        System.out.println("Input max thread`s working time:");
-        Scanner scanner1 = new Scanner(System.in);
-        long time = scanner1.nextLong();
+            if (mode == 0) {
+                System.out.println("Input max thread`s working time:");
+                Scanner scanner1 = new Scanner(System.in);
+                time = scanner1.nextLong();
+            }
+            //System.out.println(ANSI_BLUE + "MAIN thread -> " + Thread.currentThread().getName() + " / " + Thread.currentThread().getId() +
+            //            ANSI_RESET);
 
-        //System.out.println(ANSI_BLUE + "MAIN thread -> " + Thread.currentThread().getName() + " / " + Thread.currentThread().getId() +
-        //            ANSI_RESET);
+            Thread thread0 = new Thread(new Runner("save_to_xml", 100));
+            threads.add(thread0.getId());
+            thread0.start();
 
-        Thread thread0 = new Thread(new Runner("save_to_xml", 100));
-        thread0.start();
+            Thread thread1 = new Thread(new Runner("save_to_txt", 100));
+            threads.add(thread1.getId());
+            thread1.start();
 
-        Thread thread1 = new Thread(new Runner("save_to_txt", 100));
-        thread1.start();
+            Thread thread2 = new Thread(new Runner("find", time));
+            threads.add(thread2.getId());
+            thread2.start();
 
-        Thread thread2 = new Thread(new Runner("find", time));
-        thread2.start();
+            System.out.println(ANSI_BLUE + "Thread '" + Thread.currentThread().getName() + "' is completed successfully!" + ANSI_RESET);
 
-        System.out.println(ANSI_BLUE + "Thread '" + Thread.currentThread().getName() + "' is completed successfully!" + ANSI_RESET);
-
-//        if ( thread0.isAlive() ) {
-//            thread0.interrupt();
-//        }
-//
-//        if ( thread1.isAlive() ) {
-//            thread1.interrupt();
-//        }
-//
-//        if ( thread2.isAlive() ) {
-//            thread2.interrupt();
-//        }
-
-        //Scanner scanner2 = new Scanner(System.in);
-        //scanner2.nextLine();
-
-        System.exit(0);
+            return threads;
     }
 
     private static class Runner implements Runnable {
@@ -322,7 +326,6 @@ public class Menu {
                     //System.out.println(ANSI_YELLOW + "find thread -> " + Thread.currentThread().getName() + " / "
                     //                                     + Thread.currentThread().getId() + ANSI_RESET);
                     try {
-                        System.out.println("HELLLOOO");
                         if ( !container.findCar(time_in_ms) ) {
                             System.out.println(ANSI_RED + "ERROR" + ANSI_RESET);
                             System.exit(-1);
